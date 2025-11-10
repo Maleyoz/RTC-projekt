@@ -16,7 +16,9 @@
 
 
 // Init constants
-const int thresh = 20 ; // Temperature threshold for the fan activation
+const int servoPin = 9 ; 
+const int fanPin = 10;
+const int thresh = 27 ; // Temperature threshold for fan activation
 
 // Construct objects: Including servo, digital display as well as an RTC
 Servo myservo;
@@ -27,7 +29,8 @@ void setup() {
   // init communication with serial monitor as well as servo
   Serial.begin(9600);
   Wire.begin();
-  myservo.attach(9);
+  myservo.attach(servoPin);
+  pinMode(fanPin, OUTPUT);
   
   // Init RTC
   rtc.begin();
@@ -100,10 +103,11 @@ myservo.write(getTemp());
 *Returns: void
 */
 void fanWrite(float value) {
-  if (value > thresh) {
-    digitalWrite(10, HIGH);
+
+  if (value >= thresh) {
+    digitalWrite(fanPin, HIGH);
   }
   else {
-    digitalWrite(10, LOW);
+    digitalWrite(fanPin, LOW);
   }
 }
