@@ -47,7 +47,7 @@ void loop() {
   Serial.println(getTemp()); // Print temperature in serial monitor
   Serial.println(getTime()); // Print time in serial monitor
 
-  delay(999));
+  delay(999);
 }
 
 
